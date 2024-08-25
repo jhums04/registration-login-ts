@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Login from "./Login/Login";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Home from "./Home/Home";
 
-function App() {
+const App: React.FC = () => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  const PrivateRoute = () => {
+    if (isLoggedIn) {
+      return <Navigate to="/home" />;
+    } else {
+      return <Navigate to="/login" />;
+    }
+  };
+
+  useEffect(() => {
+    let jwt = localStorage.getItem("jwtToken");
+    if (jwt == null) {
+      setLoggedIn(false);
+    } else {
+      setLoggedIn(true);
+    }
+  }, [isLoggedIn]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PrivateRoute />} />
+        <Route
+          path="/login"
+          element={<Login isLoggedIn={isLoggedIn} setLogin={setLoggedIn} />}
+        />
+        <Route path="/home" element={<Home isLoggedIn={isLoggedIn} />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
