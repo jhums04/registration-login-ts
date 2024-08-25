@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Login from "./Login/Login";
+import Login from "./components/Login/Login";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Home from "./Home/Home";
+import Home from "./components/Home/Home";
+import Registration from "./components/Registration/Registration";
 
 const App: React.FC = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -33,6 +34,12 @@ const App: React.FC = () => {
           element={<Login isLoggedIn={isLoggedIn} setLogin={setLoggedIn} />}
         />
         <Route path="/home" element={<Home isLoggedIn={isLoggedIn} />} />
+        <Route
+          path="/register"
+          element={
+            <Registration setLogin={setLoggedIn} isLoggedIn={isLoggedIn} />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
