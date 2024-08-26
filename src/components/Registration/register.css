@@ -8,12 +8,16 @@
 
 .registration__form__container {
   width: 500px;
-  height: 547px;
+  height: 620px;
   border-radius: 10px;
   border: 1px 0px 0px 0px;
   opacity: 0px;
   border: 1px solid rgba(239, 239, 239, 1);
   box-shadow: 0px 4px 13px 0px rgba(82, 82, 82, 0.25);
+}
+
+.registration__form__container > form {
+  padding: 35px 0 15px 0;
 }
 
 .registration__form__container h1 {
@@ -107,4 +111,28 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+.member__login__container {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.member__login__container p {
+  display: flex;
+  gap: 10px;
+}
+
+.member__login__container p a {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  text-decoration: none;
+  color: black;
 }

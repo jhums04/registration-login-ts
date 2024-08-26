@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./register.css";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 interface RegistrationProps {
   setLogin: (isLoggedIn: boolean) => void;
@@ -19,6 +19,8 @@ const Registration: React.FC<RegistrationProps> = ({
   const [role, setRole] = useState("USER");
   const [redirect, setRedirect] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   if (isLoggedIn) {
     return <Navigate to="/home" />;
@@ -49,6 +51,7 @@ const Registration: React.FC<RegistrationProps> = ({
         setPassword("");
         setRole("USER");
       }
+
       const loadingScreenHeader = document.getElementById(
         "loading__screen__h2"
       );
@@ -64,7 +67,18 @@ const Registration: React.FC<RegistrationProps> = ({
         setRedirect(true);
       }, 10000);
     } catch (error) {
-      console.error("An error occurred:", error);
+      const loadingScreenHeader = document.getElementById(
+        "loading__screen__h2"
+      );
+
+      if (loadingScreenHeader != null) {
+        loadingScreenHeader.textContent =
+          "Something went wrong. Please try again later.";
+      }
+      setTimeout(() => {
+        console.log("before navigate");
+        navigate("/");
+      }, 5000);
     }
   };
 
@@ -179,6 +193,15 @@ const Registration: React.FC<RegistrationProps> = ({
             </div>
           </div>
         </form>
+
+        <div className="member__login__container">
+          <p>
+            Already A Member?
+            <span>
+              <Link to="/login">Login Now</Link>
+            </span>
+          </p>
+        </div>
       </div>
       {redirect && <Navigate to="/login" />}
     </div>

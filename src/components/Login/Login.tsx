@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./login.css";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 interface LoginProps {
   setLogin: (isLoggedIn: boolean) => void;
@@ -102,8 +102,7 @@ const Login: React.FC<LoginProps> = ({ isLoggedIn, setLogin }) => {
             <p>
               Not a member?{" "}
               <span>
-                {/* eslint-disable-next-line */}
-                <a target="/">Register now</a>
+                <Link to="/register">Register Now</Link>
               </span>
             </p>
           </div>
